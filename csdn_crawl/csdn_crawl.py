@@ -33,12 +33,15 @@ class CsdnCrawl:
         request = urllib.request.Request(referer, headers=headers)
         response = urllib.request.urlopen(request, context=self.context)
         html = response.read()
-        soup = BeautifulSoup(html, 'html.parser')
-        read_count = soup.find_all('span', attrs={'class': 'read-count'})[0]
-        read_count = read_count.get_text()
+        soup = BeautifulSoup(html, 'html.parser', from_encoding="iso-8859-1")
+
+        # 网页解析有问题，暂且搁置
+        print(soup.find_all(attrs={'class': "read-count"}))
+        # read_count = soup.find_all('span', attrs={'class': 'read-count'})[0]
+        # read_count = read_count.get_text()
 
         print('>> brush information ...')
-        print('>> access to {}, using proxy {}, read_count {}'.format(referer, proxy, read_count))
+        # print('>> access to {}, using proxy {}, read_count {}'.format(referer, proxy, read_count))
 
 
 if __name__ == '__main__':
